@@ -1,10 +1,18 @@
 import React, { Component } from "react";
+import NavBar from "../../Components/Navbar/index.jsx";
+import { Container, Row, Col } from "react-bootstrap";
+import "./index.css";
 
 class Home extends Component {
   render() {
     return (
       <>
-        <p>TESTING</p>
+        <NavBar page={"/"} />
+        <Container>
+          <Row>
+            
+          </Row>
+        </Container>
       </>
     );
   }
