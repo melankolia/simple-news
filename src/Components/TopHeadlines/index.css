@@ -1,0 +1,29 @@
+.container{
+    display: flex;
+    justify-content: center!important;
+}
+.image-col{
+    display: flex; 
+}
+.desc-col{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.headline-text{
+    color: black;
+    font-size: 17.5pt;
+    font-weight: bold;
+    text-align: start;
+}
+.headline-desc{
+    text-align: justify;
+    font-size: 10pt;
+    margin:0px!important;
+}
+.time-stamp{
+    display: flex;
+    margin-bottom: 0px;
+    margin-top: 10px;
+    font-size: 9pt;
+}
