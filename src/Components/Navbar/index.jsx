@@ -1,5 +1,6 @@
 import React from "react";
 import { Nav, Navbar, NavDropdown } from "react-bootstrap";
+import {Link} from 'react-router-dom'
 import { connect } from "react-redux";
 import { getNews } from "../../Redux/Actions/News";
 import "./index.css";

@@ -1,66 +1,125 @@
 import React, { Component } from "react";
+import { Container, Pagination, Row } from "react-bootstrap";
+import { connect } from "react-redux";
 import NavBar from "../../Components/Navbar/index.jsx";
-import TopHeadline from "../../Components/TopHeadlines/index.jsx";
 import News from "../../Components/News/index.jsx";
-import { Container, Row, Col } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { getNews } from "../../Redux/Actions/News";
 import "./index.css";
 
 class ListNews extends Component {
+  state = {
+    status: "loading",
+    language: "id",
+    pageSize: 5,
+    page: 1
+  };
   goToDetail = () => {
     console.log("Clicked");
   };
+  getNewsData = async page => {
+    const url = "/top-headlines";
+    const config = {
+      params: {
+        pageSize: this.state.pageSize,
+        page: page,
+        category: "technology",
+        country: this.state.language,
+        apiKey: "8aa607ed11dd49afaccc6f4a31328a61"
+      }
+    };
+    await this.props.dispatch(getNews(url, config));
+    let totalPage = Math.ceil(
+      this.props.News.DataNews.totalResults / this.state.pageSize
+    );
+    if (page < 1) {
+      page = 1;
+    } else if (page > totalPage) {
+      page = totalPage;
+    }
+    this.setState({
+      status: this.props.News.DataNews.status,
+      page: page,
+      totalPage: totalPage
+    });
+  };
+  handleLanguageChange = language => {
+    this.setState({ language: language, page: 1 });
+  };
+  componentDidMount() {
+    this.getNewsData(1);
+  }
   render() {
     return (
       <>
-        <NavBar page={"/listnews"} />
-        <Container>
-          <Row>
-            <News
-              news={{
-                image:
-                  "https://o.aolcdn.com/images/dims?thumbnail=1200%2C630&quality=80&image_uri=https%3A%2F%2Fo.aolcdn.com%2Fimages%2Fdims%3Fcrop%3D1600%252C1034%252C0%252C0%26quality%3D85%26format%3Djpg%26resize%3D1600%252C1034%26image_uri%3Dhttps%253A%252F%252Fs.yimg.com%252Fos%252Fcreatr-uploaded-images%252F2020-02%252F03902b20-49f0-11ea-bc77-83223c0fcd6d%26client%3Da1acac3e1b3290917d92%26signature%3D9b95fa3e491c82984dcb3a2247775afe6cf3abd5&client=amp-blogside-v2&signature=05d8b5825b0f5749837b85f57089317d1315dbc9",
-                title: "News",
-                desc: "Alec McKinney pleaded guilty to 17 counts related to the May 2019 shooting."
-              }}
-            />
-            <News
-              news={{
-                image:
-                  "https://o.aolcdn.com/images/dims?thumbnail=1200%2C630&quality=80&image_uri=https%3A%2F%2Fo.aolcdn.com%2Fimages%2Fdims%3Fcrop%3D1600%252C1034%252C0%252C0%26quality%3D85%26format%3Djpg%26resize%3D1600%252C1034%26image_uri%3Dhttps%253A%252F%252Fs.yimg.com%252Fos%252Fcreatr-uploaded-images%252F2020-02%252F03902b20-49f0-11ea-bc77-83223c0fcd6d%26client%3Da1acac3e1b3290917d92%26signature%3D9b95fa3e491c82984dcb3a2247775afe6cf3abd5&client=amp-blogside-v2&signature=05d8b5825b0f5749837b85f57089317d1315dbc9",
-                title: "News",
-                desc: "Alec McKinney pleaded guilty to 17 counts related to the May 2019 shooting."
-              }}
-            />
-            <News
-              news={{
-                image:
-                  "https://o.aolcdn.com/images/dims?thumbnail=1200%2C630&quality=80&image_uri=https%3A%2F%2Fo.aolcdn.com%2Fimages%2Fdims%3Fcrop%3D1600%252C1034%252C0%252C0%26quality%3D85%26format%3Djpg%26resize%3D1600%252C1034%26image_uri%3Dhttps%253A%252F%252Fs.yimg.com%252Fos%252Fcreatr-uploaded-images%252F2020-02%252F03902b20-49f0-11ea-bc77-83223c0fcd6d%26client%3Da1acac3e1b3290917d92%26signature%3D9b95fa3e491c82984dcb3a2247775afe6cf3abd5&client=amp-blogside-v2&signature=05d8b5825b0f5749837b85f57089317d1315dbc9",
-                title: "News",
-                desc: "Alec McKinney pleaded guilty to 17 counts related to the May 2019 shooting."
-              }}
-            />
-            <News
-              news={{
-                image:
-                  "https://o.aolcdn.com/images/dims?thumbnail=1200%2C630&quality=80&image_uri=https%3A%2F%2Fo.aolcdn.com%2Fimages%2Fdims%3Fcrop%3D1600%252C1034%252C0%252C0%26quality%3D85%26format%3Djpg%26resize%3D1600%252C1034%26image_uri%3Dhttps%253A%252F%252Fs.yimg.com%252Fos%252Fcreatr-uploaded-images%252F2020-02%252F03902b20-49f0-11ea-bc77-83223c0fcd6d%26client%3Da1acac3e1b3290917d92%26signature%3D9b95fa3e491c82984dcb3a2247775afe6cf3abd5&client=amp-blogside-v2&signature=05d8b5825b0f5749837b85f57089317d1315dbc9",
-                title: "News",
-                desc: "Alec McKinney pleaded guilty to 17 counts related to the May 2019 shooting."
-              }}
-            />
-            <News
-              news={{
-                image:
-                  "https://o.aolcdn.com/images/dims?thumbnail=1200%2C630&quality=80&image_uri=https%3A%2F%2Fo.aolcdn.com%2Fimages%2Fdims%3Fcrop%3D1600%252C1034%252C0%252C0%26quality%3D85%26format%3Djpg%26resize%3D1600%252C1034%26image_uri%3Dhttps%253A%252F%252Fs.yimg.com%252Fos%252Fcreatr-uploaded-images%252F2020-02%252F03902b20-49f0-11ea-bc77-83223c0fcd6d%26client%3Da1acac3e1b3290917d92%26signature%3D9b95fa3e491c82984dcb3a2247775afe6cf3abd5&client=amp-blogside-v2&signature=05d8b5825b0f5749837b85f57089317d1315dbc9",
-                title: "News",
-                desc: "Alec McKinney pleaded guilty to 17 counts related to the May 2019 shooting."
-              }}
-            />
-          </Row>
-        </Container>
+        <NavBar
+          page="/listnews"
+          language={this.state.language}
+          onLanguageChange={this.handleLanguageChange}
+        />
+        {this.state.status !== "loading" ? (
+          <>
+            <Container>
+              <Row>
+                {this.props.News.DataNews.articles.map((item, index) => (
+                  <News
+                    key={index}
+                    news={{
+                      image: item.urlToImage,
+                      title: item.title,
+                      description: item.description,
+                      language:
+                        this.state.language === "id"
+                          ? "Indonesia"
+                          : this.state.language === "gb"
+                          ? "United Kingdom"
+                          : this.state.language === "us"
+                          ? "United State"
+                          : this.state.language === "sg"
+                          ? "Singapore"
+                          : this.state.language === "jp"
+                          ? "Japan"
+                          : null
+                    }}
+                  />
+                ))}
+              </Row>
+            </Container>
+            <div className="pagination">
+              <Pagination>
+                <Pagination.First onClick={() => this.getNewsData(1)} />
+                <Pagination.Prev
+                  onClick={() => this.getNewsData(this.state.page - 1)}
+                />
+                <Pagination.Item onClick={() => this.getNewsData(1)}>
+                  {1}
+                </Pagination.Item>
+                <Pagination.Ellipsis />
+                <Pagination.Item active>{this.state.page}</Pagination.Item>
+                <Pagination.Ellipsis />
+                <Pagination.Item
+                  onClick={() => this.getNewsData(this.state.totalPage)}
+                >
+                  {this.state.totalPage}
+                </Pagination.Item>
+                <Pagination.Next
+                  onClick={() => this.getNewsData(this.state.page + 1)}
+                />
+                <Pagination.Last
+                  onClick={() => this.getNewsData(this.state.totalPage)}
+                />
+              </Pagination>
+            </div>
+          </>
+        ) : null}
       </>
     );
   }
 }
 
-export default ListNews;
+const mapStateToProps = state => {
+  return {
+    News: state.News
+  };
+};
+
+export default connect(mapStateToProps)(ListNews);

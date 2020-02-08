@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import NavBar from "../../Components/Navbar/index.jsx";
-import TopHeadline from "../../Components/TopHeadlines/index.jsx";
-import News from "../../Components/News/index.jsx";
-import { Container, Row, Col } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Container, Row } from "react-bootstrap";
 import { connect } from "react-redux";
+import NavBar from "../../Components/Navbar/index.jsx";
+import News from "../../Components/News/index.jsx";
+import TopHeadline from "../../Components/TopHeadlines/index.jsx";
 import { getNews } from "../../Redux/Actions/News";
 import "./index.css";
 
@@ -22,7 +21,7 @@ class Home extends Component {
       params: {
         pageSize: 6,
         category: "technology",
-        country: "id",
+        country: this.state.language,
         apiKey: "8aa607ed11dd49afaccc6f4a31328a61"
       }
     };
@@ -71,6 +70,7 @@ class Home extends Component {
                 {this.props.News.DataNews.articles.map((item, index) =>
                   index >= 1 ? (
                     <News
+                      key={index}
                       news={{
                         image: item.urlToImage,
                         title: item.title,
