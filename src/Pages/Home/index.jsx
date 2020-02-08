@@ -3,41 +3,106 @@ import NavBar from "../../Components/Navbar/index.jsx";
 import TopHeadline from "../../Components/TopHeadlines/index.jsx";
 import News from "../../Components/News/index.jsx";
 import { Container, Row, Col } from "react-bootstrap";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { getNews } from "../../Redux/Actions/News";
 import "./index.css";
 
 class Home extends Component {
+  state = {
+    status: "loading",
+    language: "id"
+  };
   goToDetail = () => {
     console.log("Clicked");
   };
+  getNewsData = async () => {
+    const url = "/top-headlines";
+    const config = {
+      params: {
+        pageSize: 6,
+        category: "technology",
+        country: "id",
+        apiKey: "8aa607ed11dd49afaccc6f4a31328a61"
+      }
+    };
+    await this.props.dispatch(getNews(url, config));
+    this.setState({ status: this.props.News.DataNews.status });
+  };
+  handleLanguageChange = language => {
+    this.setState({ language: language });
+  };
+  componentDidMount() {
+    this.getNewsData();
+  }
   render() {
+    console.log("RENDER");
     return (
       <>
-        <NavBar page={"/"} />
+        <NavBar
+          page={"/"}
+          language={this.state.language}
+          onLanguageChange={this.handleLanguageChange}
+        />
         <Container>
           <Row>
-            <TopHeadline
-              headline={{
-                image:
-                  "https://cdn.cnn.com/cnnnext/dam/assets/190508000602-deadly-colorado-school-shooting-update-highlands-ranch-watt-ctn-vpx-00003906-super-tease.jpg",
-                title:
-                  "One Colorado school shooting suspect pleads guilty to murder charges - CNN",
-                desc:
-                  "Alec McKinney pleaded guilty to 17 counts related to the May 2019 shooting."
-              }}
-            />
-            <News
-              news={{
-                image: "image",
-                title: "News",
-                desc: "desc"
-              }}
-            />
+            {this.state.status !== "loading" ? (
+              <>
+                <TopHeadline
+                  headline={{
+                    image: this.props.News.DataNews.articles[0].urlToImage,
+                    title: this.props.News.DataNews.articles[0].title,
+                    description: this.props.News.DataNews.articles[0]
+                      .description,
+                    language:
+                      this.state.language === "id"
+                        ? "Indonesia"
+                        : this.state.language === "gb"
+                        ? "United Kingdom"
+                        : this.state.language === "us"
+                        ? "United State"
+                        : this.state.language === "sg"
+                        ? "Singapore"
+                        : this.state.language === "jp"
+                        ? "Japan"
+                        : null
+                  }}
+                />
+                {this.props.News.DataNews.articles.map((item, index) =>
+                  index >= 1 ? (
+                    <News
+                      news={{
+                        image: item.urlToImage,
+                        title: item.title,
+                        description: item.description,
+                        language:
+                          this.state.language === "id"
+                            ? "Indonesia"
+                            : this.state.language === "gb"
+                            ? "United Kingdom"
+                            : this.state.language === "us"
+                            ? "United State"
+                            : this.state.language === "sg"
+                            ? "Singapore"
+                            : this.state.language === "jp"
+                            ? "Japan"
+                            : null
+                      }}
+                    />
+                  ) : null
+                )}
+              </>
+            ) : null}
           </Row>
         </Container>
       </>
     );
   }
 }
+const mapStateToProps = state => {
+  return {
+    News: state.News
+  };
+};
 
-export default Home;
+export default connect(mapStateToProps)(Home);

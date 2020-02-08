@@ -1,0 +1,13 @@
+.title{
+    font-size: 14pt;
+    font-weight: bold;
+    color:black;
+}
+.desc{
+    font-size: 10pt;
+}
+.time-stamp{
+    justify-self: flex-end;
+    display: flex;
+    font-size: 9pt;
+}

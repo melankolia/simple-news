@@ -1,8 +1,23 @@
 import React from "react";
 import { Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { connect } from "react-redux";
+import { getNews } from "../../Redux/Actions/News";
 import "./index.css";
 
 const NavigationBar = props => {
+  const getNewsData = async selectedKey => {
+    const url = "/top-headlines";
+    const config = {
+      params: {
+        pageSize: props.page === "/" ? 6 : 5,
+        category: "technology",
+        country: selectedKey,
+        apiKey: "8aa607ed11dd49afaccc6f4a31328a61"
+      }
+    };
+    props.onLanguageChange(selectedKey);
+    await props.dispatch(getNews(url, config));
+  };
   return (
     <>
       <Navbar
@@ -17,7 +32,7 @@ const NavigationBar = props => {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav
             className="mr-auto"
-            onSelect={selectedKey => console.log(selectedKey)}
+            onSelect={selectedKey => getNewsData(selectedKey)}
             activeKey={props.page}
           >
             <Nav.Link href="/">Home</Nav.Link>
@@ -27,7 +42,7 @@ const NavigationBar = props => {
               id="collasible-nav-dropdown"
             >
               <NavDropdown.Item eventKey="us">United States</NavDropdown.Item>
-              <NavDropdown.Item eventKey="uk">United Kingdom</NavDropdown.Item>
+              <NavDropdown.Item eventKey="gb">United Kingdom</NavDropdown.Item>
               <NavDropdown.Item eventKey="sg">Singapore</NavDropdown.Item>
               <NavDropdown.Item eventKey="jp">Japan</NavDropdown.Item>
               <NavDropdown.Item eventKey="id">Indonesia</NavDropdown.Item>
@@ -39,4 +54,10 @@ const NavigationBar = props => {
   );
 };
 
-export default NavigationBar;
+const mapStateToProps = state => {
+  return {
+    News: state.news
+  };
+};
+
+export default connect(mapStateToProps)(NavigationBar);

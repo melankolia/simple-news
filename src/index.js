@@ -8,11 +8,13 @@ import { Provider } from "react-redux";
 import store from "./Redux/store.js";
 import App from "./App";
 import Home from "./Pages/Home/index.jsx";
+import ListNews from "./Pages/NewsList/index.jsx"
 
 const AppWithRoute = () => {
   return (
     <Router>
       <Route path="/" exact component={Home} />
+      <Route path="/listnews" component={ListNews} />
     </Router>
   );
 };

@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import "./index.css";
 
 const TopHeadline = props => {
-  console.log(props.headline);
   return (
     <>
       <Col md={12} lg={{ span: 6, order: 2 }} className="image-col">
@@ -16,12 +15,12 @@ const TopHeadline = props => {
         <Link to="/detail">
           <p className="headline-text">{props.headline.title}</p>
         </Link>
-        <p className="headline-desc">{props.headline.desc}</p>
+        <p className="headline-desc">{props.headline.description}</p>
         <div className="time-stamp">
           <p style={{ marginRight: 10 }}>Posted </p>
           <p style={{ marginRight: 5 }}>10h </p>
           <p style={{ marginRight: 5 }}> | </p>
-          <p style={{ marginRight: 10 }}>Indonesia</p>
+          <p style={{ marginRight: 10 }}>{props.headline.language}</p>
         </div>
       </Col>
     </>

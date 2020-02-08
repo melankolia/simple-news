@@ -25,7 +25,7 @@ const initialState = {
           ...prevState,
           isPending: false,
           isFulfilled: true,
-          NewsData: action.payload.data[0],
+          DataNews: action.payload.data,
         };
       default:
         return prevState;

@@ -3,12 +3,13 @@
     justify-content: center!important;
 }
 .image-col{
-    display: flex; 
+    display: flex;
+    margin-bottom: 40px; 
 }
 .desc-col{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    margin-bottom: 20px; 
 }
 .headline-text{
     color: black;
@@ -19,11 +20,10 @@
 .headline-desc{
     text-align: justify;
     font-size: 10pt;
-    margin:0px!important;
+    margin-bottom: 20px;
 }
 .time-stamp{
+    justify-self: flex-end;
     display: flex;
-    margin-bottom: 0px;
-    margin-top: 10px;
     font-size: 9pt;
 }
