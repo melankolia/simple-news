@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import NavBar from "../../Components/Navbar/index.jsx";
 import "./index.css";

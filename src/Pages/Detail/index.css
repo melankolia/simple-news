@@ -1,6 +1,7 @@
 .container{
     display: flex;
     flex-direction: column;
+    width: 80%;
 }
 .image-col{
     display: flex;
@@ -11,4 +12,10 @@
     text-align: justify;
     font-size: 12pt;
     margin-bottom: 20px;
+}
+.desc-col{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin-bottom: 20px; 
 }
