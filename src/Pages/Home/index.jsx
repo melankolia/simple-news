@@ -53,6 +53,9 @@ class Home extends Component {
                     title: this.props.News.DataNews.articles[0].title,
                     description: this.props.News.DataNews.articles[0]
                       .description,
+                    content: this.props.News.DataNews.articles[0].content,
+                    author:this.props.News.DataNews.articles[0].author,
+                    source:this.props.News.DataNews.articles[0].source.name,
                     language:
                       this.state.language === "id"
                         ? "Indonesia"
@@ -75,6 +78,9 @@ class Home extends Component {
                         image: item.urlToImage,
                         title: item.title,
                         description: item.description,
+                        content: item.content,
+                        source: item.source.name,
+                        author: item.author,
                         language:
                           this.state.language === "id"
                             ? "Indonesia"

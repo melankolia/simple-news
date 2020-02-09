@@ -1,0 +1,14 @@
+.container{
+    display: flex;
+    flex-direction: column;
+}
+.image-col{
+    display: flex;
+    flex-direction: column;
+}
+.author-text{
+    color: black;
+    text-align: justify;
+    font-size: 12pt;
+    margin-bottom: 20px;
+}

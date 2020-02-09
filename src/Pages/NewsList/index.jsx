@@ -67,6 +67,9 @@ class ListNews extends Component {
                       image: item.urlToImage,
                       title: item.title,
                       description: item.description,
+                      content: item.content,
+                      source: item.source.name,
+                      author: item.author,
                       language:
                         this.state.language === "id"
                           ? "Indonesia"

@@ -7,12 +7,22 @@ const TopHeadline = props => {
   return (
     <>
       <Col md={12} lg={{ span: 6, order: 2 }} className="image-col">
-        <Link to="/detail">
+        <Link
+          to={{
+            pathname: "/detail",
+            news: props.headline
+          }}
+        >
           <img width="100%" src={props.headline.image} alt="headline" />
         </Link>
       </Col>
       <Col md={12} lg={{ span: 3, order: 1 }} className="desc-col">
-        <Link to="/detail">
+        <Link
+          to={{
+            pathname: "/detail",
+            news: props.headline
+          }}
+        >
           <p className="headline-text">{props.headline.title}</p>
         </Link>
         <p className="headline-desc">{props.headline.description}</p>

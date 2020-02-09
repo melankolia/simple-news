@@ -6,7 +6,12 @@ import "./index.css";
 const News = props => {
   return (
     <Col xs={10} md={6} lg={{ span: 3, order: 3 }}>
-      <Link to="/detail">
+      <Link
+          to={{
+            pathname: "/detail",
+            news: props.news
+          }}
+        >
         <img width="100%" src={props.news.image} alt="news" />
         <p className="title">{props.news.title}</p>
       </Link>
