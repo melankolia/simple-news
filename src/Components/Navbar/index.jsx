@@ -28,7 +28,7 @@ const NavigationBar = props => {
         variant="dark"
         sticky="top"
       >
-        <Navbar.Brand href="/">Nostra News</Navbar.Brand>
+        <Navbar.Brand href="/">Simple News</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav
