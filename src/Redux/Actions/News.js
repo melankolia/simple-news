@@ -1,6 +1,6 @@
 import Axios from "axios";
 
-const URL_STRING = "http://newsapi.org/v2";
+const URL_STRING = "https://newsapi.org/v2";
 
 export const getNews = (url, config) => {
   return {
